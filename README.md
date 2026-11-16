@@ -6,7 +6,7 @@ Operating Systems and Parallel Computing, group project.
 floating-rate debt, what is the 5th-percentile 10-year IRR, and what is the
 probability that the loan-to-value (LTV) covenant is breached at least once?
 
-**Team:** TODO (names)
+**Team:** 
 
 ## Layout
 
@@ -77,4 +77,4 @@ Writes `results/scaling.png` and prints run time, speedup and efficiency.
 
 ## Use of generative AI
 
-TODO: acknowledgement in the format required by the syllabus.
+
