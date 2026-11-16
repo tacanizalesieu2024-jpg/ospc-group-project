@@ -44,7 +44,21 @@ def check_pool(scenarios, properties, seed):
               f"identical to sequential ({scenarios} scenarios)")
 
 
+def check_threads(scenarios, properties, seed):
+    import threads
+    portfolio = generate_portfolio(properties, seed)
+    expected, _ = sequential.run(portfolio, argparse.Namespace(scenarios=scenarios, seed=seed))
+    for workers, chunksize in [(1, 0), (2, 0), (3, 7), (4, 1)]:
+        args = argparse.Namespace(scenarios=scenarios, seed=seed,
+                                  workers=workers, chunksize=chunksize)
+        got, _ = threads.run(portfolio, args)
+        assert got == expected, "threads results differ from sequential"
+        print(f"OK  threads workers={workers} chunksize={chunksize or 'auto'} "
+              f"identical to sequential ({scenarios} scenarios)")
+
+
 if __name__ == "__main__":
     check_irr()
     check_pool(scenarios=40, properties=50, seed=2026)
+    check_threads(scenarios=40, properties=50, seed=2026)
     print("ALL CHECKS PASSED")
