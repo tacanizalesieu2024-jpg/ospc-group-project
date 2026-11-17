@@ -28,6 +28,18 @@ def check_irr():
     print("OK  annual_irr matches a case with a known answer")
 
 
+    lower_bound = 0.95 ** 12 - 1.0
+    upper_bound = 1.05 ** 12 - 1.0
+
+    assert abs(annual_irr([-100.0, 90.0]) - lower_bound) < 1e-9, (
+        "annual_irr should return the lower bound for a monthly IRR below -5%"
+    )
+    assert abs(annual_irr([-100.0, 110.0]) - upper_bound) < 1e-9, (
+        "annual_irr should return the upper bound for a monthly IRR above 5%"
+    )
+    print("OK  annual_irr returns the expected bounds for out-of-range returns")
+
+
 def check_pool(scenarios, properties, seed):
     portfolio = generate_portfolio(properties, seed)
     base_args = argparse.Namespace(scenarios=scenarios, seed=seed)
