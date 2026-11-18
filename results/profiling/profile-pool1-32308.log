@@ -1,0 +1,124 @@
+node=fortran job=32308 cpus=2
+allowed CPUs: pid 2431075's current affinity list: 0,256
+CPU(s):                                  512
+Model name:                              AMD EPYC 9755 128-Core Processor
+Thread(s) per core:                      2
+Core(s) per socket:                      128
+Socket(s):                               2
+CPU(s) scaling MHz:                      51%
+CPU max MHz:                             4122.7549
+load before: 0.01 0.03 0.00 1/4823 2431082
+[sequential] scenarios=20000 properties=500
+[sequential] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[sequential] covenant breached in 4319 scenarios (21.59%)
+[sequential] workers=1 load=0.0096s startup=0.0000s compute=124.7483s elapsed=124.7483s
+[pool] scenarios=20000 properties=500
+[pool] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[pool] covenant breached in 4319 scenarios (21.59%)
+[pool] workers=1 load=0.0076s startup=0.0076s compute=126.6723s elapsed=126.6799s
+[sequential] scenarios=20000 properties=500
+[sequential] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[sequential] covenant breached in 4319 scenarios (21.59%)
+[sequential] workers=1 load=0.0081s startup=0.0000s compute=124.2982s elapsed=124.2982s
+[pool] scenarios=20000 properties=500
+[pool] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[pool] covenant breached in 4319 scenarios (21.59%)
+[pool] workers=1 load=0.0077s startup=0.0067s compute=124.7649s elapsed=124.7716s
+[sequential] scenarios=20000 properties=500
+[sequential] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[sequential] covenant breached in 4319 scenarios (21.59%)
+[sequential] workers=1 load=0.0079s startup=0.0000s compute=122.9347s elapsed=122.9347s
+[pool] scenarios=20000 properties=500
+[pool] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[pool] covenant breached in 4319 scenarios (21.59%)
+[pool] workers=1 load=0.0075s startup=0.0068s compute=126.0916s elapsed=126.0984s
+[sequential] scenarios=20000 properties=500
+[sequential] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[sequential] covenant breached in 4319 scenarios (21.59%)
+[sequential] workers=1 load=0.0080s startup=0.0000s compute=123.4643s elapsed=123.4643s
+[pool] scenarios=20000 properties=500
+[pool] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[pool] covenant breached in 4319 scenarios (21.59%)
+[pool] workers=1 load=0.0074s startup=0.0066s compute=126.1326s elapsed=126.1392s
+[sequential] scenarios=20000 properties=500
+[sequential] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[sequential] covenant breached in 4319 scenarios (21.59%)
+[sequential] workers=1 load=0.0084s startup=0.0000s compute=125.9767s elapsed=125.9767s
+[pool] scenarios=20000 properties=500
+[pool] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[pool] covenant breached in 4319 scenarios (21.59%)
+[pool] workers=1 load=0.0073s startup=0.0069s compute=125.5580s elapsed=125.5649s
+node=fortran job=32308 scenarios=2000 properties=500 start_method=fork
+
+sequential compute (profiled)  :    12.598 s   pid=2435246 allowed_cpus=[0, 256] last_cpu=0
+pool(1) total, create->join    :    12.626 s   main pid=2435246 allowed_cpus=[0, 256] last_cpu=256
+pool(1) worker compute         :    12.616 s   worker pid=2435280 allowed_cpus=[0, 256] last_cpu=0
+
+pool(1) phases:
+  pool_create_s        0.0071 s
+  first_answer_s       0.0006 s
+  map_total_s         12.6174 s
+  worker_compute_s    12.6164 s
+  map_overhead_s       0.0009 s
+  shutdown_s           0.0012 s
+
+pool overhead outside compute  :    0.0098 s (0.08% of pool total)
+worker compute vs sequential   : +0.15%
+identical IRRs                 : True
+
+Note: cProfile adds the same overhead to both versions, so compare the
+two profiles with each other, not with the unprofiled CSV timings.
+
+===== sequential (main process) =====
+         396002 function calls in 12.598 seconds
+
+   Ordered by: internal time
+   List reduced from 16 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     2000   10.299    0.005   11.758    0.006 model.py:120(simulate_scenario)
+     6000    1.066    0.000    1.066    0.000 {method 'tolist' of 'numpy.ndarray' objects}
+        1    0.840    0.840   12.598   12.598 model.py:189(simulate_range)
+   124000    0.330    0.000    0.330    0.000 model.py:95(npv)
+   240000    0.018    0.000    0.018    0.000 {method 'append' of 'list' objects}
+     2000    0.017    0.000    0.347    0.000 model.py:93(annual_irr)
+     2000    0.016    0.000    0.028    0.000 model.py:62(scenario_rng)
+     2000    0.009    0.000    0.010    0.000 _ufunc_config.py:496(inner)
+     2000    0.000    0.000    0.000    0.000 threading.py:124(RLock)
+     2000    0.000    0.000    0.000    0.000 {built-in method numpy._core._multiarray_umath._make_extobj}
+     2000    0.000    0.000    0.000    0.000 {built-in method _abc._abc_instancecheck}
+     2000    0.000    0.000    0.001    0.000 <frozen abc>:117(__instancecheck__)
+     6000    0.000    0.000    0.000    0.000 multiarray.py:197(concatenate)
+     2000    0.000    0.000    0.000    0.000 {method 'set' of '_contextvars.ContextVar' objects}
+     2000    0.000    0.000    0.000    0.000 {method 'reset' of '_contextvars.ContextVar' objects}
+
+
+
+===== pool worker, scenarios 0-2000 =====
+         396002 function calls in 12.616 seconds
+
+   Ordered by: internal time
+   List reduced from 16 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     2000   10.305    0.005   11.771    0.006 model.py:120(simulate_scenario)
+     6000    1.069    0.000    1.069    0.000 {method 'tolist' of 'numpy.ndarray' objects}
+        1    0.846    0.846   12.616   12.616 model.py:189(simulate_range)
+   124000    0.336    0.000    0.336    0.000 model.py:95(npv)
+   240000    0.018    0.000    0.018    0.000 {method 'append' of 'list' objects}
+     2000    0.016    0.000    0.352    0.000 model.py:93(annual_irr)
+     2000    0.015    0.000    0.027    0.000 model.py:62(scenario_rng)
+     2000    0.009    0.000    0.010    0.000 _ufunc_config.py:496(inner)
+     2000    0.001    0.000    0.001    0.000 threading.py:124(RLock)
+     2000    0.000    0.000    0.000    0.000 {built-in method numpy._core._multiarray_umath._make_extobj}
+     2000    0.000    0.000    0.000    0.000 {built-in method _abc._abc_instancecheck}
+     6000    0.000    0.000    0.000    0.000 multiarray.py:197(concatenate)
+     2000    0.000    0.000    0.001    0.000 <frozen abc>:117(__instancecheck__)
+     2000    0.000    0.000    0.000    0.000 {method 'set' of '_contextvars.ContextVar' objects}
+     2000    0.000    0.000    0.000    0.000 {method 'reset' of '_contextvars.ContextVar' objects}
+
+
+
+
+Written: results/profiling/profile_32308.txt
+load after: 1.11 1.07 0.84 1/5041 2435331

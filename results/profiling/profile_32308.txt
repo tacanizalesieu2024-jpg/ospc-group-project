@@ -1,0 +1,71 @@
+node=fortran job=32308 scenarios=2000 properties=500 start_method=fork
+
+sequential compute (profiled)  :    12.598 s   pid=2435246 allowed_cpus=[0, 256] last_cpu=0
+pool(1) total, create->join    :    12.626 s   main pid=2435246 allowed_cpus=[0, 256] last_cpu=256
+pool(1) worker compute         :    12.616 s   worker pid=2435280 allowed_cpus=[0, 256] last_cpu=0
+
+pool(1) phases:
+  pool_create_s        0.0071 s
+  first_answer_s       0.0006 s
+  map_total_s         12.6174 s
+  worker_compute_s    12.6164 s
+  map_overhead_s       0.0009 s
+  shutdown_s           0.0012 s
+
+pool overhead outside compute  :    0.0098 s (0.08% of pool total)
+worker compute vs sequential   : +0.15%
+identical IRRs                 : True
+
+Note: cProfile adds the same overhead to both versions, so compare the
+two profiles with each other, not with the unprofiled CSV timings.
+
+===== sequential (main process) =====
+         396002 function calls in 12.598 seconds
+
+   Ordered by: internal time
+   List reduced from 16 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     2000   10.299    0.005   11.758    0.006 model.py:120(simulate_scenario)
+     6000    1.066    0.000    1.066    0.000 {method 'tolist' of 'numpy.ndarray' objects}
+        1    0.840    0.840   12.598   12.598 model.py:189(simulate_range)
+   124000    0.330    0.000    0.330    0.000 model.py:95(npv)
+   240000    0.018    0.000    0.018    0.000 {method 'append' of 'list' objects}
+     2000    0.017    0.000    0.347    0.000 model.py:93(annual_irr)
+     2000    0.016    0.000    0.028    0.000 model.py:62(scenario_rng)
+     2000    0.009    0.000    0.010    0.000 _ufunc_config.py:496(inner)
+     2000    0.000    0.000    0.000    0.000 threading.py:124(RLock)
+     2000    0.000    0.000    0.000    0.000 {built-in method numpy._core._multiarray_umath._make_extobj}
+     2000    0.000    0.000    0.000    0.000 {built-in method _abc._abc_instancecheck}
+     2000    0.000    0.000    0.001    0.000 <frozen abc>:117(__instancecheck__)
+     6000    0.000    0.000    0.000    0.000 multiarray.py:197(concatenate)
+     2000    0.000    0.000    0.000    0.000 {method 'set' of '_contextvars.ContextVar' objects}
+     2000    0.000    0.000    0.000    0.000 {method 'reset' of '_contextvars.ContextVar' objects}
+
+
+
+===== pool worker, scenarios 0-2000 =====
+         396002 function calls in 12.616 seconds
+
+   Ordered by: internal time
+   List reduced from 16 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     2000   10.305    0.005   11.771    0.006 model.py:120(simulate_scenario)
+     6000    1.069    0.000    1.069    0.000 {method 'tolist' of 'numpy.ndarray' objects}
+        1    0.846    0.846   12.616   12.616 model.py:189(simulate_range)
+   124000    0.336    0.000    0.336    0.000 model.py:95(npv)
+   240000    0.018    0.000    0.018    0.000 {method 'append' of 'list' objects}
+     2000    0.016    0.000    0.352    0.000 model.py:93(annual_irr)
+     2000    0.015    0.000    0.027    0.000 model.py:62(scenario_rng)
+     2000    0.009    0.000    0.010    0.000 _ufunc_config.py:496(inner)
+     2000    0.001    0.000    0.001    0.000 threading.py:124(RLock)
+     2000    0.000    0.000    0.000    0.000 {built-in method numpy._core._multiarray_umath._make_extobj}
+     2000    0.000    0.000    0.000    0.000 {built-in method _abc._abc_instancecheck}
+     6000    0.000    0.000    0.000    0.000 multiarray.py:197(concatenate)
+     2000    0.000    0.000    0.001    0.000 <frozen abc>:117(__instancecheck__)
+     2000    0.000    0.000    0.000    0.000 {method 'set' of '_contextvars.ContextVar' objects}
+     2000    0.000    0.000    0.000    0.000 {method 'reset' of '_contextvars.ContextVar' objects}
+
+
+

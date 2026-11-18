@@ -1,0 +1,24 @@
+node=haskell job=32309 version=sequential workers=1 cpus=2
+allowed CPUs: pid 529304's current affinity list: 8,264
+load before: 2.29 2.41 2.97 3/7004 529309
+[sequential] scenarios=20000 properties=500
+[sequential] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[sequential] covenant breached in 4319 scenarios (21.59%)
+[sequential] workers=1 load=0.0129s startup=0.0000s compute=132.1590s elapsed=132.1590s
+[sequential] scenarios=20000 properties=500
+[sequential] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[sequential] covenant breached in 4319 scenarios (21.59%)
+[sequential] workers=1 load=0.0093s startup=0.0000s compute=131.0999s elapsed=131.0999s
+[sequential] scenarios=20000 properties=500
+[sequential] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[sequential] covenant breached in 4319 scenarios (21.59%)
+[sequential] workers=1 load=0.0094s startup=0.0000s compute=132.8688s elapsed=132.8688s
+[sequential] scenarios=20000 properties=500
+[sequential] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[sequential] covenant breached in 4319 scenarios (21.59%)
+[sequential] workers=1 load=0.0093s startup=0.0000s compute=132.7589s elapsed=132.7589s
+[sequential] scenarios=20000 properties=500
+[sequential] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[sequential] covenant breached in 4319 scenarios (21.59%)
+[sequential] workers=1 load=0.0146s startup=0.0000s compute=131.9142s elapsed=131.9142s
+load after: 3.65 3.47 3.25 3/6996 532537

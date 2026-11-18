@@ -1,0 +1,50 @@
+Part A - placement and overlap (results/profiling/sacct_original.txt)
+     job name           node       cpus   start     end cpu_use avg_our_cpus  overlapping jobs
+   29828 sequential     haskell       2      0s    673s     50%         14.7  29829,29830,29831,29832,29833
+   29829 pool           haskell       2      0s    712s     50%         14.0  29828,29830,29831,29832,29833
+   29830 pool           haskell       4      0s    360s     49%         16.8  29828,29829,29831,29832
+   29831 pool           haskell       8     51s    274s     47%         16.0  29828,29829,29830
+   29832 pool           haskell      16    274s    400s     45%         32.9  29828,29829,29830,29833
+   29833 pool           haskell      32    360s    421s     44%         46.5  29828,29829,29832
+   29834 pool           haskell      64    712s    744s     43%         64.0  -
+cpu_use = TotalCPU / (Elapsed x AllocCPUS). Hyperthreads count as CPUs,
+so one worker per physical core gives about 50% at best.
+
+Part A - placement and overlap (results/profiling/sacct_rerun.txt)
+     job name           node       cpus   start     end cpu_use avg_our_cpus  overlapping jobs
+   32308 iso            fortran       2      0s   1278s     50%          2.0  -
+   32309 iso            haskell       2   1305s   1968s     50%          2.0  -
+   32310 iso            haskell       2   1995s   2673s     50%          2.0  -
+   32311 iso            haskell       4   2685s   3030s     49%          4.0  -
+   32312 iso            haskell       8   3045s   3215s     49%          8.0  -
+   32313 iso            haskell      16   3225s   3327s     46%         16.0  -
+   32314 iso            haskell      32   3345s   3398s     44%         32.0  -
+cpu_use = TotalCPU / (Elapsed x AllocCPUS). Hyperthreads count as CPUs,
+so one worker per physical core gives about 50% at best.
+
+Part B - original vs isolated runs
+Original runs, all jobs at once (20000 scenarios)
+version    workers runs  median s     min     max  spread speedup  effic.  node
+pool             1    5    140.32  138.15  148.41      7%    0.95     95%  haskell
+pool             2    5     71.86   69.69   72.54      4%    1.86     93%  haskell
+pool             4    5     44.34   43.25   44.58      3%    3.01     75%  haskell
+pool             8    5     25.55   21.91   26.85     19%    5.22     65%  haskell
+pool            16    5     11.33   10.94   12.75     16%   11.78     74%  haskell
+pool            32    5      5.73    5.58    6.53     17%   23.30     73%  haskell
+sequential       1    5    133.47  132.38  137.77      4%    1.00    100%  haskell
+
+Isolated reruns, one job at a time (20000 scenarios)
+version    workers runs  median s     min     max  spread speedup  effic.  node
+pool             1    5    135.77  134.28  136.20      1%    0.97     97%  haskell
+pool             2    5     68.30   68.24   69.22      1%    1.93     97%  haskell
+pool             4    5     33.36   33.33   34.00      2%    3.96     99%  haskell
+pool             8    5     20.08   19.50   20.29      4%    6.58     82%  haskell
+pool            16    5     10.39    9.21   11.22     19%   12.72     80%  haskell
+sequential       1    5    132.16  131.10  132.87      1%    1.00    100%  haskell
+
+Sequential vs pool(1), alternated in one job (20000 scenarios)
+version    workers runs  median s     min     max  spread speedup  effic.  node
+pool             1    5    126.10  124.77  126.68      2%    0.99     99%  fortran
+sequential       1    5    124.30  122.93  125.98      2%    1.00    100%  fortran
+
+abab_32308.csv: pool(1) - sequential per pair = +1.9s, +0.5s, +3.2s, +2.7s, -0.4s  (median +1.9s, +1.6%)
