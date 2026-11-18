@@ -1,0 +1,24 @@
+node=haskell job=32314 version=pool workers=16 cpus=32
+allowed CPUs: pid 542983's current affinity list: 8-23,264-279
+load before: 7.33 6.12 4.56 3/6978 542988
+[pool] scenarios=20000 properties=500
+[pool] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[pool] covenant breached in 4319 scenarios (21.59%)
+[pool] workers=16 load=0.0097s startup=0.0155s compute=9.1960s elapsed=9.2115s
+[pool] scenarios=20000 properties=500
+[pool] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[pool] covenant breached in 4319 scenarios (21.59%)
+[pool] workers=16 load=0.0074s startup=0.0141s compute=10.3719s elapsed=10.3859s
+[pool] scenarios=20000 properties=500
+[pool] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[pool] covenant breached in 4319 scenarios (21.59%)
+[pool] workers=16 load=0.0074s startup=0.0138s compute=10.6505s elapsed=10.6643s
+[pool] scenarios=20000 properties=500
+[pool] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[pool] covenant breached in 4319 scenarios (21.59%)
+[pool] workers=16 load=0.0073s startup=0.0141s compute=11.2062s elapsed=11.2203s
+[pool] scenarios=20000 properties=500
+[pool] 5th-percentile IRR = -0.4089%  median IRR = 7.4968%
+[pool] covenant breached in 4319 scenarios (21.59%)
+[pool] workers=16 load=0.0073s startup=0.0144s compute=9.4365s elapsed=9.4509s
+load after: 14.85 8.32 5.39 3/6993 543373
