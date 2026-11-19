@@ -26,29 +26,29 @@ PARAMS = {
     # Portfolio
     "mean_price": 350_000.0,   # EUR, median purchase price
     "price_sigma": 0.35,       # dispersion of purchase prices (lognormal)
-    "yield_low": 0.045,        # gross rental yield, lower bound
-    "yield_high": 0.060,       # gross rental yield, upper bound
+    "yield_low": 0.04,        # gross rental yield, lower bound
+    "yield_high": 0.054,       # gross rental yield, upper bound
     "opex_ratio": 0.25,        # running costs as a share of initial rent
     "initial_ltv": 0.60,       # loan = 60% of purchase price
     # Loan
     "margin": 0.015,           # spread over Euribor
     "covenant_ltv": 0.70,      # breach if loan / value goes above this
     # Euribor (mean-reverting process)
-    "rate0": 0.022,
-    "rate_mean": 0.025,
+    "rate0": 0.032386,
+    "rate_mean": 0.009771,
     "rate_speed": 0.30,
-    "rate_sigma": 0.008,
+    "rate_sigma": 0.004949,
     "rate_floor": -0.005,
     # Prices
-    "price_drift": 0.02,       # per year
-    "price_sigma_market": 0.07,  # market-wide shock, per year
+    "price_drift": 0.0781,       # per year
+    "price_sigma_market": 0.0326,  # market-wide shock, per year
     "price_sigma_idio": 0.08,    # property-specific shock, per year
     # Rents
-    "rent_drift": 0.03,
-    "rent_sigma": 0.03,
+    "rent_drift": 0.0229,
+    "rent_sigma": 0.0127,
     # Vacancy (monthly probabilities)
-    "p_vacate": 0.02,          # occupied -> vacant
-    "p_fill": 0.35,            # vacant -> occupied
+    "p_vacate": 0.020833,          # occupied -> vacant
+    "p_fill": 1.0,            # vacant -> occupied
     # Exit
     "sale_cost": 0.03,         # selling costs as a share of value
 }

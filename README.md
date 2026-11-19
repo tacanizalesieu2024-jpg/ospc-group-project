@@ -77,4 +77,65 @@ Writes `results/scaling.png` and prints run time, speedup and efficiency.
 
 ## Use of generative AI
 
+## Model Input Calibration
+
+The financial model was calibrated using historical data for Madrid housing prices, rental prices, and the 12-month Euribor. Historical estimates replace illustrative values, while parameters without sufficient data remain documented assumptions.
+
+### Calibrated parameters
+
+| Parameter | Value | Source / Method |
+|---|---:|---|
+| price_drift | 0.0781 | INE IPV, CAGR (2015Q1–2026Q2) |
+| price_sigma_market | 0.0326 | INE IPV, annualized quarterly volatility |
+| price_sigma_idio | 0.0800 | Assumption: property-specific volatility |
+| rent_drift | 0.0229 | INE IPVA Madrid, CAGR (2015–2024) |
+| rent_sigma | 0.0127 | INE IPVA, standard deviation of annual growth |
+| yield_low | 0.0400 | Assumed lower bound |
+| yield_high | 0.0540 | Assumed upper bound |
+| rate0 | 0.032386 | Banco de España, October 2026 monthly average |
+| rate_mean | 0.009771 | Banco de España, 2015–October 2026 average |
+| rate_sigma | 0.004949 | Monthly Euribor regression residuals, annualized |
+| rate_speed | 0.3000 | Retained mean-reversion assumption |
+| p_vacate | 0.020833 | Assumed average tenancy of 48 months |
+| p_fill | 1.0000 | Assumed re-occupation in the next available month |
+
+The rental yield interval has a midpoint of 4.7%, consistent with the Madrid residential gross rental yield reported by Idealista for Q4 2025.
+
+### Data sources and periods
+
+- INE, Housing Price Index (IPV), Comunidad de Madrid, quarterly data, 2015Q1–2026Q2, base 2025.
+- INE, Experimental Rental Housing Price Index (IPVA), Madrid municipality, annual data, 2015–2024, base 2015.
+- Banco de España, 12-month Euribor, series D_DNBAF172, daily observations aggregated to monthly averages, January 2015–October 2026.
+- Idealista, residential gross rental yield, Madrid capital, Q4 2025.
+
+### Methods and conversions
+
+Housing price growth was estimated using the compound annual growth rate (CAGR). Market volatility was estimated as the standard deviation of quarterly growth multiplied by the square root of four.
+
+Rental growth was estimated using CAGR, while rental volatility was calculated as the standard deviation of annual growth rates.
+
+Daily Euribor observations were averaged by month and converted from percentages to decimal rates. Interest-rate volatility was estimated from monthly regression residuals and annualized using the square root of twelve.
+
+The simulation converts annual growth rates into monthly inputs. Annual volatility coefficients are converted using the square root of twelve. Vacancy transition probabilities are already monthly.
+
+### Assumptions and limitations
+
+- Historical growth and volatility do not guarantee future performance.
+- Regional housing price data are used as a proxy for Madrid city.
+- The IPVA is an experimental annual statistic with a limited sample of years.
+- The regional housing price index does not measure individual property volatility; price_sigma_idio remains an assumption.
+- The rental yield bounds are assumed around the published 4.7% midpoint.
+- Vacancy parameters are assumptions rather than direct estimates from observed tenant transitions.
+- Euribor regression produced a negative mean-reversion estimate (-0.032). Therefore, rate_speed = 0.30 is retained as an illustrative assumption rather than an empirically calibrated value.
+- The historical Euribor average is not a forecast of its future equilibrium.
+
+### Validation
+
+The calibrated parameters were applied to src/model.py.
+
+The equivalence test was executed using:
+
+    python tests/check_equivalence.py
+
+Result: ALL CHECKS PASSED.
 
