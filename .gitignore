@@ -4,3 +4,4 @@ __pycache__/
 .ipynb_checkpoints/
 data/
 results/*_local.csv
+.DS_Store
